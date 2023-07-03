@@ -1,0 +1,30 @@
+﻿@model List<EcommerceApp.Models.Domain.Ecommerce>
+@{
+
+}
+<h1>Ecommerce</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Price</th>
+            
+            <th> </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Name</td>
+                <td>@item.Category</td>
+                <td>@item.Price</td>
+                <td><a href="Ecommerce/View/@item.Id">View</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
