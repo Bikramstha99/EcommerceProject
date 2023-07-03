@@ -52,12 +52,26 @@ namespace EcommerceApp.Controllers
                     Category = obj.Category,
                     Price = obj.Price,
                 };
-                return View(item);
+                return View( "View",item);
 
              }
             return RedirectToAction("Index");
-
-
         }
+        [HttpPost]
+        public ActionResult View(UpdateEcommerce updateecommerce)
+        {
+            var item = ecommerce.Ecommerces.Find(updateecommerce.Id);
+            if (item != null)
+            {
+                item.Id = updateecommerce.Id;
+                item.Name = updateecommerce.Name;
+                item.Category = updateecommerce.Category;
+                item.Price = updateecommerce.Price;
+                ecommerce.Ecommerces.Update(item);
+                ecommerce.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return RedirectToAction("Index");
         }
+    }
 }
