@@ -73,5 +73,16 @@ namespace EcommerceApp.Controllers
             }
             return RedirectToAction("Index");
         }
+        public IActionResult Delete(int id)
+        {
+            var item = ecommerce.Ecommerces.Find(id);
+            if(item != null)
+            {
+                ecommerce.Ecommerces.Remove(item);
+                ecommerce.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return RedirectToAction("Index");
+        }
     }
 }
