@@ -1,5 +1,6 @@
 using EcommerceApp.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,6 +8,11 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<EcommerceDbContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("MVC")));
+
+builder.Services.AddDefaultIdentity<IdentityUser>().
+    AddDefaultTokenProviders().
+    AddRoles<IdentityRole>()
+    .AddEntityFrameworkStores<EcommerceDbContext>();
 
 var app = builder.Build();
 
@@ -28,5 +34,7 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.MapRazorPages();
 
 app.Run();
